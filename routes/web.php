@@ -60,3 +60,59 @@ Route::get('/articles/{id}', function ($id) {
 Route::get('/user/{name?}', function ($name = 'John') {
     return 'Nama saya ' . $name;
 });
+
+/**
+ * Routing name
+ */
+Route::get('/user/profile', function () {
+
+})->name('profile');
+
+/**
+ * Group Routing
+ */
+Route::middleware(['first', 'second'])->group(function () { Route::get('/', function () {
+// Uses first & second middleware...
+});
+    Route::get('/user/profile', function () {
+// Uses first & second middleware...
+    });
+});
+
+/**
+ * Group Routing
+ */
+Route::domain('{account}.example.com')->group(function ()
+{ Route::get('user/{id}', function ($account, $id) {
+    //
+    });
+});
+
+/**
+ * Group Routing
+ */
+Route::middleware('auth')->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/post', [PostController::class, 'index']);
+    Route::get('/event', [EventController::class, 'index']);
+});
+
+/**
+ * Prefixes Routing
+ */
+Route::prefix('admin')->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/post', [PostController::class, 'index']);
+    Route::get('/event', [EventController::class, 'index']);
+});
+
+/**
+ * Redirect Routing
+ */
+Route::redirect('/here', '/there');
+
+/**
+ * View Routing
+ */
+Route::view('/welcome', 'welcome');
+Route::view('/welcome', 'welcome', ['name' => 'Taylor']);

@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,40 +80,40 @@ Route::get('/test', function () {
 /**
  * Group Routing
  */
-Route::middleware(['first', 'second'])->group(function () { Route::get('/', function () {
+/*Route::middleware(['first', 'second'])->group(function () { Route::get('/', function () {
 // Uses first & second middleware...
 });
     Route::get('/user/profile', function () {
 // Uses first & second middleware...
     });
-});
+});*/
 
 /**
  * Group Routing
  */
-Route::domain('{account}.example.com')->group(function ()
-{ Route::get('user/{id}', function ($account, $id) {
-    //
-    });
-});
+//Route::domain('{account}.example.com')->group(function ()
+//{ Route::get('user/{id}', function ($account, $id) {
+//    //
+//    });
+//});
 
 /**
  * Group Routing
  */
-Route::middleware('auth')->group(function () {
-    Route::get('/user', [UserController::class, 'index']);
-    Route::get('/post', [PostController::class, 'index']);
-    Route::get('/event', [EventController::class, 'index']);
-});
+//Route::middleware('auth')->group(function () {
+//    Route::get('/user', [UserController::class, 'index']);
+//    Route::get('/post', [PostController::class, 'index']);
+//    Route::get('/event', [EventController::class, 'index']);
+//});
 
 /**
  * Prefixes Routing
  */
-Route::prefix('admin')->group(function () {
-    Route::get('/user', [UserController::class, 'index']);
-    Route::get('/post', [PostController::class, 'index']);
-    Route::get('/event', [EventController::class, 'index']);
-});
+//Route::prefix('admin')->group(function () {
+//    Route::get('/user', [UserController::class, 'index']);
+//    Route::get('/post', [PostController::class, 'index']);
+//    Route::get('/event', [EventController::class, 'index']);
+//});
 
 /**
  * Redirect Routing
@@ -143,3 +144,22 @@ Route::get('/articles/{id}', [PageController::class, 'articles']);
 Route::get('/', [HomeController::class]);
 Route::get('/about', [AboutController::class]);
 Route::get('/articles/{id}', [ArticleController::class]);
+
+/**
+ * Routing For Resource Controller
+ */
+Route::resource('photos', PhotoController::class);
+
+/**
+ * Routing for Only desirable method in Resource Controller
+ */
+Route::resource('photos', PhotoController::class)->only([
+    'index', 'show'
+]);
+
+/**
+ * Routing for exclude unwanted method in Resource Controller
+ */
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+]);

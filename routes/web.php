@@ -36,3 +36,20 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return 'NIM     : 2241720133'. '<br>'. 'Nama    : Muhammad Khairunnas Nurdin';
 });
+
+/**
+ * Routing Parameters
+ */
+Route::get('/user/{name}', function ($name) {
+    return 'Nama saya ' . $name;
+});
+Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
+    return 'Pos ke-' . $postId . " Komentar ke-" . $commentId;
+});
+
+/**
+ * Use Case Routing Parameters in Jobsheet
+ */
+Route::get('/articles/{id}', function ($id) {
+    return "Halaman Artikel dengan ID: $id";
+});

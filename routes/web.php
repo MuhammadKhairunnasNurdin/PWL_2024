@@ -163,3 +163,10 @@ Route::resource('photos', PhotoController::class)->only([
 Route::resource('photos', PhotoController::class)->except([
     'create', 'store', 'update', 'destroy'
 ]);
+
+/**
+ * Routing that directly to View
+ */
+Route::get('/greeting', function () {
+    return view('hello', ['name' => 'Muhammad Khairunnas Nurdin']);
+});

@@ -64,9 +64,12 @@ Route::get('/user/{name?}', function ($name = 'John') {
 /**
  * Routing name
  */
-Route::get('/user/profile', function () {
-
+Route::get('/profile/user/{name}', function ($name) {
+    return "hey $name";
 })->name('profile');
+Route::get('/test', function () {
+    return to_route('profile', ['name' => 'khairunnas']);
+});
 
 /**
  * Group Routing

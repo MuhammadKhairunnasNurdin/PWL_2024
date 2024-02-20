@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,12 +35,12 @@ Route::get('/world', function () {
 /**
  * Use Case Basic Routing in Jobsheet
  */
-Route::get('/', function () {
+/*Route::get('/', function () {
     return 'Selamat Datang';
 });
 Route::get('/about', function () {
     return 'NIM     : 2241720133'. '<br>'. 'Nama    : Muhammad Khairunnas Nurdin';
-});
+});*/
 
 /**
  * Routing Parameters
@@ -50,9 +55,9 @@ Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
 /**
  * Use Case Routing Parameters in Jobsheet
  */
-Route::get('/articles/{id}', function ($id) {
+/*Route::get('/articles/{id}', function ($id) {
     return "Halaman Artikel dengan ID: $id";
-});
+});*/
 
 /**
  * Optional Routing
@@ -119,3 +124,22 @@ Route::redirect('/here', '/there');
  */
 Route::view('/welcome', 'welcome');
 Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
+
+/**
+ * Routing with Controller
+ */
+Route::get('/hello', [WelcomeController::class, 'hello']);
+
+/**
+ * Routing For modified Practicum point 2
+ */
+Route::get('/', [PageController::class, 'index']);
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/articles/{id}', [PageController::class, 'articles']);
+
+/**
+ * Routing for Single Action Controller
+ */
+Route::get('/', [HomeController::class]);
+Route::get('/about', [AboutController::class]);
+Route::get('/articles/{id}', [ArticleController::class]);

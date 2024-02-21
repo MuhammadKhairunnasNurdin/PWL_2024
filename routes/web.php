@@ -141,9 +141,9 @@ Route::get('/articles/{id}', [PageController::class, 'articles']);
 /**
  * Routing for Single Action Controller
  */
-Route::get('/', [HomeController::class]);
-Route::get('/about', [AboutController::class]);
-Route::get('/articles/{id}', [ArticleController::class]);
+Route::get('/', HomeController::class);
+Route::get('/about', AboutController::class);
+Route::get('/articles/{id}', ArticleController::class);
 
 /**
  * Routing For Resource Controller
